@@ -9,11 +9,26 @@ namespace DIO.Series
         private List<Serie> listaSerie = new List<Serie>();
 		public void Atualiza(int id, Serie objeto)
 		{
+			if (listaSerie.Count == 0)
+				throw new Exception("Lista de séries vazia.");
+
+			if (id >= listaSerie.Count || id < 0)
+				throw new Exception("Id inválido");
+
 			listaSerie[id] = objeto;
 		}
 
 		public void Exclui(int id)
 		{
+			if (listaSerie.Count == 0)
+				throw new Exception("Lista de séries vazia.");
+
+			if (id >= listaSerie.Count || id < 0)
+				throw new Exception("Id inválido");
+
+			if (listaSerie[id].retornaExcluido())
+				throw new Exception("Este Id já foi excluído anteriormente do sistema.");
+
 			listaSerie[id].Excluir();
 		}
 
@@ -34,6 +49,12 @@ namespace DIO.Series
 
 		public Serie RetornaPorId(int id)
 		{
+			if (listaSerie.Count == 0)
+				throw new Exception("Lista de séries vazia.");
+
+			if (id >= listaSerie.Count || id < 0)
+				throw new Exception("Id inválido");
+
 			return listaSerie[id];
 		}
 	}

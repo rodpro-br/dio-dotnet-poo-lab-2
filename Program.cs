@@ -33,7 +33,8 @@ namespace DIO.Series
 						break;
 
 					default:
-						throw new ArgumentOutOfRangeException();
+						Console.WriteLine("Informe uma opção correta do Menu.");
+						break;
 				}
 
 				opcaoUsuario = ObterOpcaoUsuario();
@@ -48,7 +49,16 @@ namespace DIO.Series
 			Console.Write("Digite o id da série: ");
 			int indiceSerie = int.Parse(Console.ReadLine());
 
-			repositorio.Exclui(indiceSerie);
+			try
+			{
+				repositorio.Exclui(indiceSerie);
+
+				Console.WriteLine("Exclusão com sucesso.");
+			}
+			catch (Exception ex)
+            {
+				Console.WriteLine(ex.Message);
+            }
 		}
 
         private static void VisualizarSerie()
@@ -56,9 +66,16 @@ namespace DIO.Series
 			Console.Write("Digite o id da série: ");
 			int indiceSerie = int.Parse(Console.ReadLine());
 
-			var serie = repositorio.RetornaPorId(indiceSerie);
+			try
+			{
+				var serie = repositorio.RetornaPorId(indiceSerie);
 
-			Console.WriteLine(serie);
+				Console.WriteLine(serie);
+			}
+			catch (Exception ex)
+            {
+				Console.WriteLine(ex.Message);
+            }
 		}
 
         private static void AtualizarSerie()
@@ -89,8 +106,16 @@ namespace DIO.Series
 										titulo: entradaTitulo,
 										ano: entradaAno,
 										descricao: entradaDescricao);
+			try
+			{
+				repositorio.Atualiza(indiceSerie, atualizaSerie);
 
-			repositorio.Atualiza(indiceSerie, atualizaSerie);
+				Console.WriteLine("Atualização com sucesso.");
+			}
+			catch (Exception ex)
+            {
+				Console.WriteLine(ex.Message);
+            }
 		}
         private static void ListarSeries()
 		{
